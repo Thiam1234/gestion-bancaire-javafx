@@ -51,34 +51,29 @@ public class BanqueController {
 
     @FXML
     public void initialize() {
-        // Configuration des colonnes Clients
+        
         colClientId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         colClientNom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNom()));
         colClientPrenom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrenom()));
         colClientTel.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelephone()));
         colClientEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
 
-        // Configuration colonnes Comptes
         colCompteId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         colCompteNumero.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumeroCompte()));
         colCompteSolde.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSolde()).asObject());
         colCompteType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTypeCompte()));
         colCompteIdClient.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdClient()).asObject());
 
-        // Colonnes Opérations
         colOpId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         colOpType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTypeOperation()));
         colOpMontant.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getMontant()).asObject());
         colOpDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDateOperation().toString()));
 
-        // Remplir combo types
         comboTypeCompte.setItems(FXCollections.observableArrayList("courant", "epargne"));
 
-        // Charger données
         chargerClients();
         chargerComptes();
 
-        // Listener pour sélection client dans tableau
         tableClients.getSelectionModel().selectedItemProperty().addListener((obs, old, selected) -> {
             if (selected != null) {
                 txtNom.setText(selected.getNom());
@@ -88,7 +83,6 @@ public class BanqueController {
             }
         });
 
-        // Listener pour sélection compte dans tableau
         tableComptes.getSelectionModel().selectedItemProperty().addListener((obs, old, selected) -> {
             if (selected != null) {
                 txtNumeroCompte.setText(selected.getNumeroCompte());
@@ -99,9 +93,7 @@ public class BanqueController {
             }
         });
 
-        // Remplir comboBox client pour Comptes
         comboClient.setItems(clientsList);
-        // Remplir comboBox des comptes pour opérations
         mettreAJourComboComptes();
     }
 
