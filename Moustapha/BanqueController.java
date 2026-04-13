@@ -74,7 +74,7 @@ public class BanqueController {
         chargerClients();
         chargerComptes();
 
-        // Listener pour sélection client dans tableau
+        
         tableClients.getSelectionModel().selectedItemProperty().addListener((obs, old, selected) -> {
             if (selected != null) {
                 txtNom.setText(selected.getNom());
